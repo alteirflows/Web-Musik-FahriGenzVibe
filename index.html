@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>FahriGenzVibe Music</title>
+  <meta name="theme-color" content="#24ff8a" />
+  <meta name="application-name" content="FahriGenzVibe Music" />
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+    :root{
+      --bg:#05060a;--panel:#0d1018;--panel2:#151927;--line:#24304a;
+      --txt:#f5f7ff;--muted:#9aa4bd;--green:#24ff8a;--cyan:#00e5ff;
+      --blue:#3572ff;--pink:#ff3df2;--red:#ff3d64;--orange:#ff914d;
+      --shadow:0 18px 50px #000b;
+    }
+    body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+    body:before{content:"";position:fixed;inset:0;background:
+      radial-gradient(circle at 12% 10%,#24ff8a22,transparent 32%),
+      radial-gradient(circle at 85% 12%,#00e5ff1f,transparent 31%),
+      radial-gradient(circle at 52% 85%,#ff3df21c,transparent 36%),
+      linear-gradient(145deg,#05060a,#090c14 45%,#05060a);z-index:-2}
+    body:after{content:"";position:fixed;inset:0;background-image:linear-gradient(#ffffff05 1px,transparent 1px),linear-gradient(90deg,#ffffff05 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(#000,transparent 75%);z-index:-1}
+    button,input{font-family:inherit}button{border:0;cursor:pointer;color:var(--txt)}.hidden{display:none!important}
+    .login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
+    .login-card{width:100%;max-width:430px;background:#0d1018d9;border:1px solid #24ff8a44;border-radius:30px;padding:28px;box-shadow:var(--shadow);backdrop-filter:blur(20px)}
+    .brand-logo{width:78px;height:78px;border-radius:26px;margin:0 auto 18px;background:linear-gradient(135deg,var(--green),var(--cyan));display:grid;place-items:center;color:#02120c;font-size:38px;font-weight:1000;box-shadow:0 0 34px #24ff8a66}
+    .login h1{text-align:center;font-size:31px;letter-spacing:.4px}.login p{text-align:center;color:var(--muted);margin:8px 0 24px}
+    .field-label{color:var(--muted);font-size:13px;margin:12px 0 7px}.input{width:100%;padding:16px;border-radius:18px;border:1px solid #24304a;background:#080a10;color:#fff;font-size:16px;outline:none}.input:focus{border-color:var(--cyan);box-shadow:0 0 0 3px #00e5ff1b}
+    .btn{border-radius:18px;padding:15px 18px;background:linear-gradient(135deg,var(--green),var(--cyan));color:#03100d;font-weight:900;box-shadow:0 0 20px #24ff8a33}.btn-full{width:100%;font-size:16px;margin-top:18px}.btn-dark{background:#171b29;color:#fff;box-shadow:none;border:1px solid #24304a}
+    .app{min-height:100vh;padding-bottom:162px}.page{display:none;padding:20px}.page.active{display:block}
+    .top{display:flex;align-items:center;gap:13px;margin-bottom:18px}.avatar{width:50px;height:50px;border-radius:18px;background:linear-gradient(135deg,var(--orange),var(--pink));display:grid;place-items:center;font-weight:1000;color:#130209;font-size:22px;box-shadow:0 0 20px #ff3df244;flex-shrink:0}.title-wrap{flex:1}.title{font-size:28px;font-weight:1000;line-height:1.05}.subtitle{color:var(--muted);font-size:13px;margin-top:4px}
+    .icon-btn{width:48px;height:48px;border-radius:17px;background:#121725;border:1px solid #24304a;font-size:24px;display:grid;place-items:center}.icon-btn.glow{border-color:#24ff8a66;box-shadow:0 0 18px #24ff8a22}
+    .search-shell{display:flex;gap:10px;margin:18px 0}.search-shell input{flex:1;padding:15px 16px;border-radius:18px;border:1px solid #24304a;background:#0b0e16;color:#fff;outline:none;font-size:15px}.search-shell button{padding:0 18px;border-radius:18px;background:linear-gradient(135deg,var(--green),var(--cyan));color:#06100c;font-weight:900}
+    .chips{display:flex;gap:10px;overflow-x:auto;padding:2px 0 15px}.chips::-webkit-scrollbar{display:none}.chip{background:#131827;border:1px solid #24304a;color:#c9d2ee;border-radius:999px;padding:11px 17px;font-weight:800;white-space:nowrap}.chip.active{background:#24ff8a22;border-color:#24ff8a;color:#fff;box-shadow:0 0 18px #24ff8a18}
+    .hero{border-radius:30px;background:linear-gradient(135deg,#102016,#101b35 55%,#281132);border:1px solid #24ff8a33;padding:22px;box-shadow:var(--shadow);overflow:hidden;position:relative}.hero:after{content:"";position:absolute;width:190px;height:190px;border-radius:50%;right:-70px;top:-60px;background:#00e5ff22;filter:blur(8px)}.hero h2{font-size:30px;margin-bottom:8px}.hero p{color:#cad3e8;line-height:1.45}.hero-actions{display:flex;gap:10px;margin-top:18px}.hero-actions button{padding:12px 16px;border-radius:16px;background:#ffffff14;border:1px solid #ffffff18}
+    h3{font-size:23px;margin:26px 0 14px}.quick-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}.quick{height:78px;background:#121725;border:1px solid #24304a;border-radius:20px;display:flex;align-items:center;gap:12px;overflow:hidden;box-shadow:0 10px 28px #0005}.quick img,.quick .fallback{width:78px;height:78px;object-fit:cover;background:#1d2437;display:grid;place-items:center;color:var(--green);font-size:28px}.quick b{font-size:15px;line-height:1.25}
+    .scroll-row{display:flex;gap:15px;overflow-x:auto;padding-bottom:10px}.scroll-row::-webkit-scrollbar{display:none}.card{width:145px;flex:0 0 145px;background:#101522;border:1px solid #24304a;border-radius:22px;padding:10px;box-shadow:0 12px 26px #0004}.cover{width:100%;height:125px;border-radius:16px;object-fit:cover;background:#1d2437}.card-title{font-weight:900;margin-top:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-sub{color:var(--muted);font-size:13px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .list{display:flex;flex-direction:column;gap:12px}.track{display:flex;align-items:center;gap:12px;background:#101522;border:1px solid #24304a;border-radius:22px;padding:10px}.track:hover{border-color:#24ff8a88}.track-cover{width:64px;height:64px;border-radius:16px;object-fit:cover;background:#1d2437;flex-shrink:0}.fallback.track-cover{display:grid;place-items:center;color:var(--green);font-size:26px}.track-main{min-width:0;flex:1}.track-title{font-weight:1000;font-size:17px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.track-artist{font-size:13px;color:var(--muted);margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.mini-actions{display:flex;gap:6px}.round-btn{width:42px;height:42px;border-radius:15px;background:#171d2d;border:1px solid #2e3a58;display:grid;place-items:center;font-size:20px}.round-btn.liked{background:#24ff8a22;border-color:#24ff8a;color:var(--green)}
+    .browse-grid{display:grid;grid-template-columns:1fr 1fr;gap:13px}.genre{height:106px;border-radius:24px;padding:16px;overflow:hidden;position:relative;font-weight:1000;font-size:21px;box-shadow:0 12px 30px #0005}.genre span{position:relative;z-index:1}.genre:after{content:"♪";position:absolute;right:12px;bottom:-5px;font-size:62px;opacity:.25;transform:rotate(-18deg)}
+    .collection-card{background:#101522;border:1px solid #24304a;border-radius:26px;padding:16px;margin-bottom:12px;display:flex;align-items:center;gap:14px}.collection-icon{width:72px;height:72px;border-radius:20px;background:linear-gradient(135deg,var(--blue),var(--pink));display:grid;place-items:center;font-size:28px}.profile-card{background:linear-gradient(160deg,#101522,#161b2b,#081a16);border:1px solid #24ff8a44;border-radius:30px;padding:22px;box-shadow:var(--shadow)}.profile-head{display:flex;align-items:center;gap:16px}.big-avatar{width:92px;height:92px;border-radius:30px;background:linear-gradient(135deg,var(--orange),var(--pink));display:grid;place-items:center;font-weight:1000;color:#16030a;font-size:42px}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.stat{background:#0b0f18;border:1px solid #24304a;border-radius:20px;padding:14px;text-align:center}.stat b{font-size:25px;color:var(--green)}
+    .toast{position:fixed;left:16px;right:16px;bottom:166px;background:#151927;border:1px solid #ff3d6444;color:#fff;border-radius:18px;padding:14px;z-index:80;box-shadow:var(--shadow);display:none}.toast.show{display:block}.toast b{color:#ff8398}
+    .player{position:fixed;left:12px;right:12px;bottom:74px;background:#0e1320e9;border:1px solid #24ff8a55;border-radius:24px;padding:10px;display:flex;align-items:center;gap:10px;z-index:60;box-shadow:0 0 26px #24ff8a18;backdrop-filter:blur(16px)}.player img,.player .p-fallback{width:58px;height:58px;border-radius:17px;object-fit:cover;background:#1d2437;display:grid;place-items:center;color:var(--green)}.player-info{min-width:0;flex:1}.p-title{font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.p-sub{font-size:13px;color:var(--muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.player button{width:43px;height:43px;border-radius:15px;background:#151b2a;border:1px solid #2e3a58}.progress{position:absolute;left:16px;right:16px;bottom:0;height:3px;background:#2e3a58}.progress span{display:block;height:3px;background:linear-gradient(90deg,var(--green),var(--cyan));width:0%}
+    .bottom{position:fixed;left:0;right:0;bottom:0;height:72px;background:#07090ee8;border-top:1px solid #24304a;backdrop-filter:blur(18px);display:grid;grid-template-columns:repeat(4,1fr);z-index:55}.tab{background:none;color:#8b96b4;font-size:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}.tab i{font-style:normal;font-size:25px}.tab.active{color:var(--green)}
+    .empty{color:var(--muted);text-align:center;padding:35px 10px}.loader{color:var(--muted);padding:16px}
+
+    .clickable{cursor:pointer}.clickable:active{transform:scale(.98)}
+    .full-player{position:fixed;inset:0;background:linear-gradient(180deg,#4b210f 0%,#24140f 58%,#08090d 100%);z-index:120;padding:22px 22px 26px;display:flex;flex-direction:column;gap:16px;overflow:auto}
+    .full-player.hidden{display:none!important}
+    .fp-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+    .fp-small{text-align:center;color:#fff;font-size:12px;letter-spacing:.5px;text-transform:uppercase}.fp-playlist{text-align:center;font-weight:900;margin-top:3px}
+    .fp-icon{width:44px;height:44px;border-radius:16px;background:#ffffff00;color:#fff;font-size:30px;border:0}
+    .fp-cover{width:100%;aspect-ratio:1/1;border-radius:10px;object-fit:cover;background:#121725;margin:62px auto 26px;box-shadow:0 18px 60px #0008;max-width:520px}
+    .fp-fallback{width:100%;aspect-ratio:1/1;border-radius:10px;background:linear-gradient(135deg,#101522,#21334d);display:grid;place-items:center;font-size:92px;color:var(--green);margin:62px auto 26px;max-width:520px}
+    .fp-lyric{font-size:20px;font-weight:900;margin:2px 0 30px;color:#fff}
+    .fp-meta{display:flex;align-items:center;gap:12px}.fp-titlebox{flex:1;min-width:0}.fp-title{font-size:24px;font-weight:1000;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.fp-artist{color:#c7c7c7;font-size:16px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .fp-action{width:48px;height:48px;border-radius:16px;background:#ffffff00;color:#fff;border:0;font-size:34px}
+    .fp-range{width:100%;accent-color:#fff}.fp-time{display:flex;justify-content:space-between;color:#d2d2d2;font-size:13px;margin-top:-6px}
+    .fp-controls{display:grid;grid-template-columns:1fr 1fr 76px 1fr 1fr;align-items:center;gap:12px;margin-top:8px}.fp-control{height:58px;border-radius:18px;background:transparent;color:#fff;font-size:30px}.fp-control.main{height:76px;border-radius:50%;background:#fff;color:#111;font-size:32px}.fp-control.active{color:var(--green)}
+    .fp-bottom{display:flex;justify-content:space-between;margin-top:8px;color:#fff}.fp-bottom button{background:transparent;color:#fff;font-size:24px}
+    .playlist-modal{position:fixed;inset:0;background:#0009;z-index:130;display:grid;place-items:center;padding:20px}.playlist-modal.hidden{display:none}.modal-card{width:100%;max-width:390px;background:#101522;border:1px solid #24ff8a55;border-radius:26px;padding:20px;box-shadow:var(--shadow)}.modal-card h3{margin:0 0 10px}.modal-card p{color:var(--muted);margin-bottom:14px}.modal-actions{display:flex;gap:10px;margin-top:12px}.modal-actions button{flex:1}
+
+    @media(min-width:760px){.app{max-width:540px;margin:auto}.player{max-width:516px;margin:auto}.bottom{max-width:540px;margin:auto}.page{padding:26px}.quick-grid,.browse-grid{grid-template-columns:1fr 1fr}}
+  </style>
+</head>
+<body>
+<section id="loginPage" class="login">
+  <div class="login-card">
+    <div class="brand-logo">♫</div>
+    <h1>FahriGenzVibe Music</h1>
+    <p>Login untuk masuk ke dashboard musik elegan.</p>
+    <div class="field-label">Username</div>
+    <input id="usernameInput" class="input" placeholder="Contoh: Fahrigenz" autocomplete="off">
+    <div class="field-label">Role</div>
+    <input id="roleInput" class="input" placeholder="Premium / Owner / User" value="Premium" autocomplete="off">
+    <button class="btn btn-full" id="loginBtn">Masuk Dashboard</button>
+    <button class="btn btn-full btn-dark" id="guestBtn">Masuk sebagai Guest</button>
+  </div>
+</section>
+
+<section id="app" class="app hidden">
+  <main id="homePage" class="page active">
+    <div class="top">
+      <div class="avatar userInitial">F</div>
+      <div class="title-wrap"><div class="title">FahriGenzVibe</div><div class="subtitle">Musik pilihan untuk kamu</div></div>
+      <button class="icon-btn glow" id="refreshBtn">↻</button>
+    </div>
+    <div class="chips"><button class="chip active" data-filter="semua">Semua</button><button class="chip" data-filter="musik">Musik</button><button class="chip" data-filter="favorit">Favorit</button><button class="chip" data-filter="trending">Trending</button></div>
+    <section class="hero">
+      <h2>Stream your vibe.</h2>
+      <p>Hola Welcome To FahriGenzVibe Music. Cari, simpan favorit, dan putar lagu dari satu tempat.</p>
+      <div class="hero-actions"><button onclick="goPage('search')">Cari Lagu</button><button onclick="goPage('library')">Playlist Saya</button></div>
+    </section>
+    <div class="quick-grid" id="quickGrid"></div>
+    <h3>Trending</h3>
+    <div class="scroll-row" id="trendCards"></div>
+    <h3>Sering diputar</h3>
+    <div class="list" id="recentList"></div>
+  </main>
+
+  <main id="searchPage" class="page">
+    <div class="top"><div class="avatar userInitial">F</div><div class="title-wrap"><div class="title">Cari Musik</div><div class="subtitle">Temukan lagu favoritmu</div></div></div>
+    <div class="search-shell"><input id="searchInput" placeholder="Cari lagu, contoh: nina"><button id="searchBtn">Cari</button></div>
+    <div class="browse-grid">
+      <div class="genre" style="background:linear-gradient(135deg,#ff3df2,#572dff)"><span>Pop Neon</span></div>
+      <div class="genre" style="background:linear-gradient(135deg,#00e5ff,#1554ff)"><span>Chill Wave</span></div>
+      <div class="genre" style="background:linear-gradient(135deg,#24ff8a,#0d7bff)"><span>Indo Hits</span></div>
+      <div class="genre" style="background:linear-gradient(135deg,#ff914d,#ff3d64)"><span>Galau Mode</span></div>
+    </div>
+    <h3>Hasil Pencarian</h3>
+    <div class="list" id="searchResults"><p class="empty">Ketik judul lagu lalu tekan Cari.</p></div>
+  </main>
+
+  <main id="libraryPage" class="page">
+    <div class="top"><div class="avatar userInitial">F</div><div class="title-wrap"><div class="title">Koleksi</div><div class="subtitle">Playlist dan lagu favoritmu</div></div><button class="icon-btn" id="addPlaylistBtn">＋</button></div>
+    <div class="collection-card clickable" id="likedPlaylist"><div class="collection-icon">♥</div><div><div class="track-title">Lagu Disukai</div><div class="track-artist">Playlist • <span class="userName">User</span></div></div></div>
+    <div class="collection-card clickable" id="neonMix"><div class="collection-icon" style="background:linear-gradient(135deg,#00e5ff,#24ff8a)">♫</div><div><div class="track-title">Neon Mix</div><div class="track-artist">Auto playlist • FahriGenzVibe</div></div></div>
+    <h3>Favorit Kamu</h3>
+    <div class="list" id="favList"></div>
+  </main>
+
+  <main id="profilePage" class="page">
+    <div class="top"><div class="avatar userInitial">F</div><div class="title-wrap"><div class="title">Profil</div><div class="subtitle">Info pengguna</div></div><button class="icon-btn" id="logoutBtn">↪</button></div>
+    <div class="profile-card">
+      <div class="profile-head"><div class="big-avatar userInitial">F</div><div><h2 class="userName">User</h2><p id="roleText" style="color:var(--green);font-weight:800;margin-top:6px">Premium</p><p style="color:var(--muted);margin-top:7px">Dashboard pribadi FahriGenzVibe Music.</p></div></div>
+      <div class="stats"><div class="stat"><b id="favCount">0</b><br><span>Favorit</span></div><div class="stat"><b id="playedCount">0</b><br><span>Diputar</span></div><div class="stat"><b id="trackCount">0</b><br><span>Track</span></div></div>
+    </div>
+  </main>
+</section>
+
+<div id="toast" class="toast"></div>
+
+<div id="player" class="player hidden" onclick="openFullPlayer()">
+  <div id="playerCoverBox" class="p-fallback">♫</div>
+  <div class="player-info"><div id="playerTitle" class="p-title">Belum ada lagu</div><div id="playerArtist" class="p-sub">Pilih lagu untuk mulai</div></div>
+  <button id="likeBtn" onclick="event.stopPropagation()">♥</button>
+  <button id="playPauseBtn" onclick="event.stopPropagation()">▶</button>
+  <div class="progress"><span id="progressBar"></span></div>
+  <audio id="audio" crossorigin="anonymous"></audio>
+</div>
+
+
+<section id="fullPlayer" class="full-player hidden">
+  <div class="fp-top">
+    <button class="fp-icon" id="closeFullPlayer">⌄</button>
+    <div><div class="fp-small">Memainkan dari playlist</div><div class="fp-playlist" id="fpPlaylistName">Neon Mix</div></div>
+    <button class="fp-icon">⋮</button>
+  </div>
+  <div id="fpCoverWrap" class="fp-fallback">♫</div>
+  <div class="fp-lyric" id="fpLyric">Pilih lagu untuk mulai</div>
+  <div class="fp-meta">
+    <div class="fp-titlebox"><div class="fp-title" id="fpTitle">Belum ada lagu</div><div class="fp-artist" id="fpArtist">FahriGenzVibe</div></div>
+    <button class="fp-action" id="fpLike">♡</button>
+    <button class="fp-action" id="fpCloseAlt">×</button>
+  </div>
+  <input id="fpSeek" class="fp-range" type="range" min="0" max="1000" value="0">
+  <div class="fp-time"><span id="fpNow">0:00</span><span id="fpDur">0:00</span></div>
+  <div class="fp-controls">
+    <button class="fp-control active" id="fpShuffle">⤨</button>
+    <button class="fp-control" id="fpPrev">◀|</button>
+    <button class="fp-control main" id="fpPlay">▶</button>
+    <button class="fp-control" id="fpNext">|▶</button>
+    <button class="fp-control" id="fpRepeat">↻</button>
+  </div>
+  <div class="fp-bottom"><button>▣</button><button>⌯</button><button>☰</button></div>
+</section>
+
+<div id="playlistModal" class="playlist-modal hidden">
+  <div class="modal-card">
+    <h3>Buat Playlist Baru</h3>
+    <p>Masukkan nama playlist. Playlist akan muncul sebagai info singkat di koleksi.</p>
+    <input id="playlistNameInput" class="input" placeholder="Contoh: Night Ride">
+    <div class="modal-actions">
+      <button class="btn btn-dark" id="cancelPlaylist">Batal</button>
+      <button class="btn" id="savePlaylist">Simpan</button>
+    </div>
+  </div>
+</div>
+
+<nav id="bottomNav" class="bottom hidden">
+  <button class="tab active" data-page="home"><i>⌂</i>Home</button>
+  <button class="tab" data-page="search"><i>⌕</i>Cari</button>
+  <button class="tab" data-page="library"><i>▤</i>Koleksi</button>
+  <button class="tab" data-page="profile"><i>◉</i>Profil</button>
+</nav>
+
+<script>
+(() => {
+  const API = 'https://www.sankavollerei.com/download/spotify/play?apikey=planaai&q=';
+  const starterQueries = ['nina', 'serana', 'latih', 'everything u are', 'tarot', 'kita buat menyenangkan', 'sampai nanti', 'dewi', 'takkan bisa', 'terpukau', 'that sould be me', 'tak pernah ternilai', 'seluruh nafas ini', 'aishiteru', 'masa ini masa nanti dan masa indah lainnya', 'ku tak bisa', 'i mis u but i hate u', 'di ujung jalan', 'kekasih yg tak di anggap', 'pure love breakbeat', 'negoro angin', 'sewates konco', 'sesi potret', 'aku kamu dan samudra', 'about you', 'clbk', 'cinta terakhir', 'sedia aku sebelum hujan', 'jangan paksa rindu', 'pedih', 'iqro', 'hingga tua bersama', 'Whered All the Time Go?', 'bunga kertas merah berduri', 'risk it all', 'payphone', 'strong', 'to the bone', 'ours to keep', 'cinnamon girl',  'cincin', 'bertaut', 'monolog', 'monokrom', 'semua lagu cinta terdengar sama', 'bahagia lagi', 'kita ke sana', 'kita usahakan rumah itu', 'bergema sampai selamanya', 'kota ini tak sama tanpamu', 'lesung pipi', 'rahasia hati', 'evaluasi', 'bukannya aku takut', 'ada titik titik di ujung doa', 'separuh aku', '33×', 'babak terakhir', 'bersenja gurau', 'tak ada ujungnya', 'kebutuhan hati',  'mengapa', 'sadrah', 'penyangkalan', 'jakarta hari ini', 'di akhir perang', 'angin rindu', 'butuh waktu', 'ku bukan mesin lotremu', 'langit tak seharusnya biru', 'kau pameran utama di sebuah opera', 'mimpi sementara', 'bajingan keparat', 'resah jadi luka', 'rumah ke rumah', 'diary depresiku', 'boyband', 'wanita masih banyak', 'pesawat tempurku', 'tikus tikus kantor', 'rayakan pertemanan', 'sampai jumpa', 'hal hebat', 'Location Unknown', 'sesuatu di jogja', 'The Lazy Song', 'bercinta lewat kata', 'multo',  'back to friends', 'notion', 'terpikat senyummu', 'terlalu lama', 'bunga maaf', 'blue',  'satu bulan','jatuh suka', 'berapa kali kita akan saling memaafkan', 'lantas', 'alamak','hindia', 'feast', 'bernady', 'tulus', 'pamungkas', 'juicy luicy', 'rizky febian','mahalini', 'lyodra', 'tiara andini', 'raisa', 'afgan', 'yura yunita', 'nadin amizah','for revenge', 'dewa 19', 'sheila on 7', 'noah', 'ungu', 'armada', 'd masiv','vierra', 'samsons','fourtwnty', 'fiersa besari', 'denny caknan', 'ndx aka','happy asmara', 'guyon waton', 'aftershine', 'weird genius', 'rich brian', 'niki', 'coldplay', 'bruno mars', 'the weeknd', 'ariana grande', 'taylor swift', 'billie eilish', 'justin bieber', 'ed sheeran','olivia rodrigo','sza','new jeans','blackpink','bts','one direction','lany','wave to earth','keshi', 'joji','viral tiktok indonesia','top hits indonesia','lagu galau indonesia','lagu pop indonesia'];
+  const $ = id => document.getElementById(id);
+  const audio = $('audio');
+
+  const APP_NAME = 'FahriGenzVibe Music';
+  const LOGO_ICON = 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+      <defs>
+        <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#24ff8a"/>
+          <stop offset="45%" stop-color="#00e5ff"/>
+          <stop offset="100%" stop-color="#ff3df2"/>
+        </linearGradient>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="12" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
+        </filter>
+      </defs>
+      <rect width="512" height="512" rx="118" fill="#05060a"/>
+      <rect x="38" y="38" width="436" height="436" rx="96" fill="url(#g)" opacity="0.95" filter="url(#glow)"/>
+      <circle cx="256" cy="256" r="132" fill="#071018" opacity="0.92"/>
+      <path d="M294 132v184c0 39-32 70-78 70-39 0-70-23-70-55 0-35 35-59 78-47 10 3 19 7 26 12V175h112v48h-68z" fill="#ffffff"/>
+      <text x="256" y="455" text-anchor="middle" font-family="Arial, sans-serif" font-size="42" font-weight="900" fill="#ffffff">F</text>
+    </svg>
+  `);
+
+  setupAppIdentity();
+
+
+  let user = JSON.parse(localStorage.getItem('neonflow_user') || 'null');
+  let tracks = [];
+  let favorites = [];
+  let currentTrack = null;
+  let played = Number(localStorage.getItem('neonflow_played') || 0);
+
+  $('loginBtn').onclick = () => doLogin(false);
+  $('guestBtn').onclick = () => doLogin(true);
+  $('searchBtn').onclick = searchMusic;
+  $('refreshBtn').onclick = loadDashboard;
+  $('logoutBtn').onclick = logout;
+  $('playPauseBtn').onclick = togglePlay;
+  $('likeBtn').onclick = () => toggleFavorite(currentTrack);
+  $('closeFullPlayer').onclick = closeFullPlayer;
+  $('fpCloseAlt').onclick = closeFullPlayer;
+  $('fpPlay').onclick = togglePlay;
+  $('fpLike').onclick = () => toggleFavorite(currentTrack);
+  $('fpPrev').onclick = prevTrack;
+  $('fpNext').onclick = nextTrack;
+  $('fpSeek').oninput = seekFullPlayer;
+  $('addPlaylistBtn').onclick = openPlaylistModal;
+  $('cancelPlaylist').onclick = closePlaylistModal;
+  $('savePlaylist').onclick = savePlaylistModal;
+  $('likedPlaylist').onclick = () => { goPage('library'); renderList('favList', favorites); showToast('Menampilkan Lagu Disukai.'); };
+  $('neonMix').onclick = () => { const mix = tracks.length ? tracks : favorites; renderList('favList', mix.slice(0, 12)); showToast('Neon Mix dibuka. Tekan lagu untuk memutar.'); };
+  document.querySelectorAll('.chip').forEach(btn => btn.onclick = () => filterHome(btn.dataset.filter, btn));
+  $('searchInput').addEventListener('keydown', e => { if (e.key === 'Enter') searchMusic(); });
+  document.querySelectorAll('.tab').forEach(btn => btn.onclick = () => goPage(btn.dataset.page));
+
+
+  function setupAppIdentity(){
+    try{
+      let icon = document.querySelector('link[rel="icon"]');
+      if (!icon) {
+        icon = document.createElement('link');
+        icon.rel = 'icon';
+        document.head.appendChild(icon);
+      }
+      icon.type = 'image/svg+xml';
+      icon.href = LOGO_ICON;
+
+      let apple = document.querySelector('link[rel="apple-touch-icon"]');
+      if (!apple) {
+        apple = document.createElement('link');
+        apple.rel = 'apple-touch-icon';
+        document.head.appendChild(apple);
+      }
+      apple.href = LOGO_ICON;
+
+      const manifestData = {
+        name: APP_NAME,
+        short_name: 'FahriVibe',
+        start_url: '.',
+        display: 'standalone',
+        background_color: '#05060a',
+        theme_color: '#24ff8a',
+        icons: [
+          { src: LOGO_ICON, sizes: '192x192', type: 'image/svg+xml' },
+          { src: LOGO_ICON, sizes: '512x512', type: 'image/svg+xml' }
+        ]
+      };
+
+      let manifest = document.querySelector('link[rel="manifest"]');
+      if (!manifest) {
+        manifest = document.createElement('link');
+        manifest.rel = 'manifest';
+        document.head.appendChild(manifest);
+      }
+      manifest.href = URL.createObjectURL(new Blob([JSON.stringify(manifestData)], { type: 'application/manifest+json' }));
+    }catch(e){
+      console.warn('setup identity failed', e);
+    }
+  }
+
+  function updateMediaSession(track){
+    if (!track || !('mediaSession' in navigator) || typeof MediaMetadata === 'undefined') return;
+
+    navigator.mediaSession.metadata = new MediaMetadata({
+      title: track.title || APP_NAME,
+      artist: track.artist || 'FahriGenzVibe',
+      album: APP_NAME,
+      artwork: [
+        { src: LOGO_ICON, sizes: '96x96', type: 'image/svg+xml' },
+        { src: LOGO_ICON, sizes: '128x128', type: 'image/svg+xml' },
+        { src: LOGO_ICON, sizes: '192x192', type: 'image/svg+xml' },
+        { src: LOGO_ICON, sizes: '256x256', type: 'image/svg+xml' },
+        { src: LOGO_ICON, sizes: '512x512', type: 'image/svg+xml' }
+      ]
+    });
+
+    try { navigator.mediaSession.setActionHandler('play', () => togglePlay()); } catch(e){}
+    try { navigator.mediaSession.setActionHandler('pause', () => togglePlay()); } catch(e){}
+    try { navigator.mediaSession.setActionHandler('previoustrack', () => prevTrack()); } catch(e){}
+    try { navigator.mediaSession.setActionHandler('nexttrack', () => nextTrack()); } catch(e){}
+    try {
+      navigator.mediaSession.setActionHandler('seekto', details => {
+        if (details.fastSeek && 'fastSeek' in audio) audio.fastSeek(details.seekTime);
+        else audio.currentTime = details.seekTime;
+      });
+    } catch(e){}
+  }
+
+  function updateMediaPlaybackState(){
+    if (!('mediaSession' in navigator)) return;
+    navigator.mediaSession.playbackState = audio.paused ? 'paused' : 'playing';
+  }
+
+  function doLogin(guest){
+    const name = guest ? 'Guest User' : ($('usernameInput').value.trim() || 'Fahrigenz');
+    const role = guest ? 'Guest' : ($('roleInput').value.trim() || 'Premium');
+    user = { name, role };
+    localStorage.setItem('neonflow_user', JSON.stringify(user));
+    startApp();
+  }
+
+  function logout(){
+    localStorage.removeItem('neonflow_user');
+    location.reload();
+  }
+
+  function startApp(){
+    $('loginPage').classList.add('hidden');
+    $('app').classList.remove('hidden');
+    $('bottomNav').classList.remove('hidden');
+    const initial = (user.name || 'U')[0].toUpperCase();
+    document.querySelectorAll('.userInitial').forEach(el => el.textContent = initial);
+    document.querySelectorAll('.userName').forEach(el => el.textContent = user.name);
+    $('roleText').textContent = user.role;
+    favorites = JSON.parse(localStorage.getItem('neonflow_fav_' + user.name) || '[]');
+    renderFavorites();
+    updateStats();
+    loadDashboard();
+  }
+
+  function goPage(page){
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    $(page + 'Page').classList.add('active');
+    document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.page === page));
+    renderFavorites();
+  }
+  window.goPage = goPage;
+
+
+  function filterHome(type, btn){
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    if (type === 'favorit') {
+      renderQuickFrom(favorites);
+      renderCards('trendCards', favorites);
+      renderList('recentList', favorites);
+      showToast('Filter Favorit aktif.');
+      return;
+    }
+    if (type === 'trending') {
+      const hot = tracks.slice().sort((a,b) => (String(a.title).length % 7) - (String(b.title).length % 7));
+      renderQuickFrom(hot.slice(0,4));
+      renderCards('trendCards', hot.slice(0,12));
+      renderList('recentList', hot.slice(0,6));
+      showToast('Filter Trending aktif.');
+      return;
+    }
+    if (type === 'musik') {
+      renderQuickFrom(tracks.slice(0,4));
+      renderCards('trendCards', tracks.filter(t => t.previewUrl).slice(0,12));
+      renderList('recentList', tracks.filter(t => t.previewUrl).slice(0,8));
+      showToast('Menampilkan semua musik yang siap diputar.');
+      return;
+    }
+    renderQuick();
+    renderCards('trendCards', tracks.slice(0, 12));
+    renderList('recentList', tracks.slice(0, 5));
+  }
+
+  function renderQuickFrom(list){
+    $('quickGrid').innerHTML = list.slice(0, 4).map(t => `
+      <div class="quick" onclick="playByUrl('${enc(t.previewUrl)}')">
+        ${cover(t.thumbnail, 'fallback')}
+        <b>${esc(t.title)}</b>
+      </div>`).join('') || '<p class="empty">Belum ada data.</p>';
+  }
+
+  function openPlaylistModal(){
+    $('playlistModal').classList.remove('hidden');
+    $('playlistNameInput').focus();
+  }
+  function closePlaylistModal(){ $('playlistModal').classList.add('hidden'); }
+  function savePlaylistModal(){
+    const name = $('playlistNameInput').value.trim();
+    if (!name) return showToast('Nama playlist belum diisi.');
+    closePlaylistModal();
+    showToast('Playlist "' + name + '" berhasil dibuat.');
+    $('playlistNameInput').value = '';
+  }
+
+  async function loadDashboard(){
+    $('quickGrid').innerHTML = '<p class="loader">Memuat musik...</p>';
+    const result = (await Promise.all(starterQueries.slice(0, 10).map(fetchTracks))).flat();
+    tracks = unique([...result, ...tracks]);
+    renderQuick();
+    renderCards('trendCards', tracks.slice(0, 12));
+    renderList('recentList', tracks.slice(0, 5));
+    updateStats();
+  }
+
+  async function searchMusic(){
+    const q = $('searchInput').value.trim();
+    if (!q) return showToast('Masukkan judul lagu dulu.');
+    $('searchResults').innerHTML = '<p class="loader">Mencari musik...</p>';
+    const found = await fetchTracks(q);
+    tracks = unique([...found, ...tracks]);
+    renderList('searchResults', found);
+    if (!found.length) showToast('Lagu tidak ditemukan atau API tidak mengirim audio valid.');
+    updateStats();
+  }
+
+  async function fetchTracks(query){
+    try{
+      const res = await fetch(API + encodeURIComponent(query), { cache: 'no-store' });
+      const data = await res.json();
+      return normalize(data, query);
+    }catch(e){
+      console.warn(e);
+      showToast('API gagal diakses. Coba refresh atau gunakan judul lain.');
+      return [];
+    }
+  }
+
+  function normalize(data, fallback){
+    const out = [];
+    function read(x){
+      if (Array.isArray(x)) return x.forEach(read);
+      if (!x || typeof x !== 'object') return;
+      const url = pick(x, ['download','audio','audioUrl','audio_url','url','mp3','m4a','stream','streamUrl','previewUrl','preview']);
+      const title = pick(x, ['title','name','judul','trackName'], fallback);
+      const artist = pick(x, ['artist','artis','artists','singer','author','creator'], 'Unknown Artist');
+      const thumb = pick(x, ['image','thumbnail','thumb','cover','artwork','poster'], '');
+      const dur = pick(x, ['duration','durasi','time'], '3:00');
+      if (url && url.startsWith('http')) {
+        out.push({ id: title + '-' + artist + '-' + url, title, artist, thumbnail: thumb, previewUrl: url, duration: dur });
+      }
+      ['result','data','results','tracks','items','songs','list','music','song'].forEach(k => { if (x[k] && x[k] !== x) read(x[k]); });
+    }
+    read(data);
+    return unique(out);
+  }
+
+  function pick(obj, keys, fallback=''){
+    for (const k of keys) {
+      const v = obj?.[k];
+      if (v == null) continue;
+      if (Array.isArray(v)) {
+        const joined = v.map(i => typeof i === 'object' ? pick(i, ['name','title','artist']) : String(i)).filter(Boolean).join(', ');
+        if (joined.trim()) return joined.trim();
+      } else if (typeof v === 'object') {
+        const nested = pick(v, ['name','title','url','link','download','artist']);
+        if (nested.trim()) return nested.trim();
+      } else if (String(v).trim() && String(v).trim() !== 'null') {
+        return String(v).trim();
+      }
+    }
+    return fallback;
+  }
+
+  function unique(arr){
+    return [...new Map(arr.map(t => [t.previewUrl || t.title + t.artist, t])).values()];
+  }
+
+  function renderQuick(){
+    renderQuickFrom(tracks);
+  }
+
+  function renderCards(id, list){
+    $(id).innerHTML = list.map(t => `
+      <div class="card" onclick="playByUrl('${enc(t.previewUrl)}')">
+        ${cover(t.thumbnail, 'cover')}
+        <div class="card-title">${esc(t.title)}</div>
+        <div class="card-sub">${esc(t.artist)}</div>
+      </div>`).join('') || '<p class="empty">Belum ada lagu.</p>';
+  }
+
+  function renderList(id, list){
+    $(id).innerHTML = list.map(t => `
+      <div class="track">
+        ${cover(t.thumbnail, 'track-cover')}
+        <div class="track-main" onclick="playByUrl('${enc(t.previewUrl)}')">
+          <div class="track-title">${esc(t.title)}</div>
+          <div class="track-artist">${esc(t.artist)} • ${esc(t.duration || '3:00')}</div>
+        </div>
+        <div class="mini-actions">
+          <button class="round-btn ${isFav(t) ? 'liked' : ''}" onclick="toggleFavoriteByUrl('${enc(t.previewUrl)}')">♥</button>
+          <button class="round-btn" onclick="playByUrl('${enc(t.previewUrl)}')">▶</button>
+        </div>
+      </div>`).join('') || '<p class="empty">Belum ada lagu.</p>';
+  }
+
+  function renderFavorites(){
+    renderList('favList', favorites);
+    updateStats();
+  }
+
+  function allTracks(){
+    return unique([...tracks, ...favorites]);
+  }
+
+  function playByUrl(urlEnc){
+    const url = decodeURIComponent(urlEnc);
+    const track = allTracks().find(t => t.previewUrl === url);
+    if (track) playTrack(track);
+  }
+  window.playByUrl = playByUrl;
+  window.toggleFavoriteByUrl = function(urlEnc){
+    const track = allTracks().find(t => t.previewUrl === decodeURIComponent(urlEnc));
+    toggleFavorite(track);
+  };
+
+
+  function openFullPlayer(){
+    if (!currentTrack) return showToast('Pilih lagu dulu.');
+    syncFullPlayer();
+    $('fullPlayer').classList.remove('hidden');
+  }
+  window.openFullPlayer = openFullPlayer;
+  function closeFullPlayer(){ $('fullPlayer').classList.add('hidden'); }
+
+  function syncFullPlayer(){
+    if (!currentTrack) return;
+    $('fpTitle').textContent = currentTrack.title;
+    $('fpArtist').textContent = currentTrack.artist;
+    $('fpLyric').textContent = currentTrack.title ? 'Sedang memutar ' + currentTrack.title : 'Nikmati vibemu';
+    $('fpPlay').textContent = audio.paused ? '▶' : 'Ⅱ';
+    $('fpLike').textContent = isFav(currentTrack) ? '♥' : '♡';
+    $('likeBtn').textContent = isFav(currentTrack) ? '♥' : '♡';
+    $('fpCoverWrap').outerHTML = currentTrack.thumbnail
+      ? `<img id="fpCoverWrap" class="fp-cover" src="${esc(currentTrack.thumbnail)}" onerror="this.outerHTML='<div id=&quot;fpCoverWrap&quot; class=&quot;fp-fallback&quot;>♫</div>'">`
+      : `<div id="fpCoverWrap" class="fp-fallback">♫</div>`;
+  }
+
+  function nextTrack(){
+    const list = allTracks();
+    if (!list.length) return;
+    const idx = list.findIndex(t => currentTrack && t.previewUrl === currentTrack.previewUrl);
+    playTrack(list[(idx + 1 + list.length) % list.length]);
+  }
+  function prevTrack(){
+    const list = allTracks();
+    if (!list.length) return;
+    const idx = list.findIndex(t => currentTrack && t.previewUrl === currentTrack.previewUrl);
+    playTrack(list[(idx - 1 + list.length) % list.length]);
+  }
+  function seekFullPlayer(){
+    if (!audio.duration) return;
+    audio.currentTime = (Number($('fpSeek').value) / 1000) * audio.duration;
+  }
+  function fmt(sec){
+    if (!isFinite(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2,'0');
+    return m + ':' + s;
+  }
+
+  async function playTrack(track){
+    try{
+      currentTrack = track;
+      updateMediaSession(track);
+      $('player').classList.remove('hidden');
+      $('playerTitle').textContent = track.title;
+      $('playerArtist').textContent = track.artist;
+      $('playerCoverBox').outerHTML = track.thumbnail
+        ? `<img id="playerCoverBox" src="${esc(track.thumbnail)}" onerror="this.outerHTML='<div id=&quot;playerCoverBox&quot; class=&quot;p-fallback&quot;>♫</div>'">`
+        : `<div id="playerCoverBox" class="p-fallback">♫</div>`;
+      $('playPauseBtn').textContent = '...'; $('fpPlay').textContent = '...';
+      audio.pause();
+      audio.removeAttribute('src');
+      audio.load();
+      audio.src = track.previewUrl;
+      await audio.play();
+      $('playPauseBtn').textContent = 'Ⅱ';
+      $('fpPlay').textContent = 'Ⅱ';
+      syncFullPlayer();
+      played++;
+      localStorage.setItem('neonflow_played', played);
+      updateStats();
+    }catch(e){
+      console.warn('play failed', e);
+      $('playPauseBtn').textContent = '▶'; $('fpPlay').textContent = '▶';
+      showToast('Musik gagal diputar. Link audio dari API kemungkinan tidak support browser/expired. Coba lagu lain.');
+    }
+  }
+
+  function togglePlay(){
+    if (!currentTrack) return showToast('Pilih lagu dulu.');
+    if (audio.paused) {
+      audio.play().then(() => { $('playPauseBtn').textContent = 'Ⅱ'; $('fpPlay').textContent = 'Ⅱ'; }).catch(() => showToast('Audio belum bisa diputar.'));
+    } else {
+      audio.pause();
+      $('playPauseBtn').textContent = '▶'; $('fpPlay').textContent = '▶';
+    }
+    syncFullPlayer();
+  }
+
+  audio.addEventListener('timeupdate', () => {
+    if (audio.duration) {
+      const pct = (audio.currentTime / audio.duration) * 100;
+      $('progressBar').style.width = pct + '%';
+      $('fpSeek').value = Math.floor((audio.currentTime / audio.duration) * 1000);
+      $('fpNow').textContent = fmt(audio.currentTime);
+      $('fpDur').textContent = fmt(audio.duration);
+    }
+  });
+  audio.addEventListener('play', () => { updateMediaPlaybackState(); syncFullPlayer(); });
+  audio.addEventListener('pause', () => { updateMediaPlaybackState(); syncFullPlayer(); });
+  audio.addEventListener('ended', () => {
+    const list = allTracks();
+    const idx = list.findIndex(t => currentTrack && t.previewUrl === currentTrack.previewUrl);
+    const next = list[(idx + 1) % list.length];
+    if (next) playTrack(next);
+  });
+  audio.addEventListener('error', () => {
+    if (currentTrack) showToast('Audio error dari sumber API. Coba lagu lain.');
+  });
+
+  function toggleFavorite(track){
+    if (!track) return;
+    if (isFav(track)) favorites = favorites.filter(f => f.previewUrl !== track.previewUrl);
+    else favorites.unshift(track);
+    favorites = unique(favorites);
+    localStorage.setItem('neonflow_fav_' + user.name, JSON.stringify(favorites));
+    renderFavorites();
+    renderList('recentList', tracks.slice(0, 5));
+    syncFullPlayer();
+  }
+
+  function isFav(track){
+    return favorites.some(f => track && f.previewUrl === track.previewUrl);
+  }
+
+  function updateStats(){
+    $('favCount').textContent = favorites.length;
+    $('playedCount').textContent = played;
+    $('trackCount').textContent = tracks.length;
+  }
+
+  function showToast(msg){
+    const el = $('toast');
+    el.innerHTML = `<b>Info:</b> ${esc(msg)}`;
+    el.classList.add('show');
+    clearTimeout(window.toastTimer);
+    window.toastTimer = setTimeout(() => el.classList.remove('show'), 4200);
+  }
+
+  function cover(src, cls){
+    return src ? `<img class="${cls}" src="${esc(src)}" onerror="this.outerHTML='<div class=&quot;${cls}&quot;>♫</div>'">` : `<div class="${cls}">♫</div>`;
+  }
+
+  function enc(s){ return encodeURIComponent(s || ''); }
+  function esc(s){ return String(s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+
+  if (user) startApp();
+})();
+</script>
+</body>
+</html>

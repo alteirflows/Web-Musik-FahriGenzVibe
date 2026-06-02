@@ -186,8 +186,9 @@
 
 <script>
 (() => {
-  const API = 'https://www.sankavollerei.com/download/spotify/play?apikey=planaai&q=';
-  const starterQueries = ['nina', 'serana', 'latih', 'everything u are', 'tarot', 'kita buat menyenangkan', 'sampai nanti', 'dewi', 'takkan bisa', 'terpukau', 'that sould be me', 'tak pernah ternilai', 'seluruh nafas ini', 'aishiteru', 'masa ini masa nanti dan masa indah lainnya', 'ku tak bisa', 'i mis u but i hate u', 'di ujung jalan', 'kekasih yg tak di anggap', 'pure love breakbeat', 'negoro angin', 'sewates konco', 'sesi potret', 'aku kamu dan samudra', 'about you', 'clbk', 'cinta terakhir', 'sedia aku sebelum hujan', 'jangan paksa rindu', 'pedih', 'iqro', 'hingga tua bersama', 'Whered All the Time Go?', 'bunga kertas merah berduri', 'risk it all', 'payphone', 'strong', 'to the bone', 'ours to keep', 'cinnamon girl',  'cincin', 'bertaut', 'monolog', 'monokrom', 'semua lagu cinta terdengar sama', 'bahagia lagi', 'kita ke sana', 'kita usahakan rumah itu', 'bergema sampai selamanya', 'kota ini tak sama tanpamu', 'lesung pipi', 'rahasia hati', 'evaluasi', 'bukannya aku takut', 'ada titik titik di ujung doa', 'separuh aku', '33×', 'babak terakhir', 'bersenja gurau', 'tak ada ujungnya', 'kebutuhan hati',  'mengapa', 'sadrah', 'penyangkalan', 'jakarta hari ini', 'di akhir perang', 'angin rindu', 'butuh waktu', 'ku bukan mesin lotremu', 'langit tak seharusnya biru', 'kau pameran utama di sebuah opera', 'mimpi sementara', 'bajingan keparat', 'resah jadi luka', 'rumah ke rumah', 'diary depresiku', 'boyband', 'wanita masih banyak', 'pesawat tempurku', 'tikus tikus kantor', 'rayakan pertemanan', 'sampai jumpa', 'hal hebat', 'Location Unknown', 'sesuatu di jogja', 'The Lazy Song', 'bercinta lewat kata', 'multo',  'back to friends', 'notion', 'terpikat senyummu', 'terlalu lama', 'bunga maaf', 'blue',  'satu bulan','jatuh suka', 'berapa kali kita akan saling memaafkan', 'lantas', 'alamak','hindia', 'feast', 'bernady', 'tulus', 'pamungkas', 'juicy luicy', 'rizky febian','mahalini', 'lyodra', 'tiara andini', 'raisa', 'afgan', 'yura yunita', 'nadin amizah','for revenge', 'dewa 19', 'sheila on 7', 'noah', 'ungu', 'armada', 'd masiv','vierra', 'samsons','fourtwnty', 'fiersa besari', 'denny caknan', 'ndx aka','happy asmara', 'guyon waton', 'aftershine', 'weird genius', 'rich brian', 'niki', 'coldplay', 'bruno mars', 'the weeknd', 'ariana grande', 'taylor swift', 'billie eilish', 'justin bieber', 'ed sheeran','olivia rodrigo','sza','new jeans','blackpink','bts','one direction','lany','wave to earth','keshi', 'joji','viral tiktok indonesia','top hits indonesia','lagu galau indonesia','lagu pop indonesia'];
+  // Gunakan proxy lokal ke backend. Backend akan mencari full audio dari Jamendo.
+  const API = '/api/search?q=';
+  const starterQueries = ['serana', 'latih', 'everything u are', 'tarot', 'kita buat menyenangkan', 'sampai nanti', 'dewi', 'takkan bisa', 'terpukau', 'that sould be me', 'tak pernah ternilai', 'seluruh nafas ini', 'aishiteru', 'masa ini masa nanti dan masa indah lainnya', 'ku tak bisa', 'i mis u but i hate u', 'di ujung jalan', 'kekasih yg tak di anggap', 'pure love breakbeat', 'negoro angin', 'sewates konco', 'sesi potret', 'aku kamu dan samudra', 'about you', 'clbk', 'cinta terakhir', 'sedia aku sebelum hujan', 'jangan paksa rindu', 'pedih', 'iqro', 'hingga tua bersama', 'Whered All the Time Go?', 'bunga kertas merah berduri', 'risk it all', 'payphone', 'strong', 'to the bone', 'ours to keep', 'cinnamon girl',  'cincin', 'bertaut', 'monolog', 'monokrom', 'semua lagu cinta terdengar sama', 'bahagia lagi', 'kita ke sana', 'kita usahakan rumah itu', 'bergema sampai selamanya', 'kota ini tak sama tanpamu', 'lesung pipi', 'rahasia hati', 'evaluasi', 'bukannya aku takut', 'ada titik titik di ujung doa', 'separuh aku', '33×', 'babak terakhir', 'bersenja gurau', 'tak ada ujungnya', 'kebutuhan hati',  'mengapa', 'sadrah', 'penyangkalan', 'jakarta hari ini', 'di akhir perang', 'angin rindu', 'butuh waktu', 'ku bukan mesin lotremu', 'langit tak seharusnya biru', 'kau pameran utama di sebuah opera', 'mimpi sementara', 'bajingan keparat', 'resah jadi luka', 'rumah ke rumah', 'diary depresiku', 'boyband', 'wanita masih banyak', 'pesawat tempurku', 'tikus tikus kantor', 'rayakan pertemanan', 'sampai jumpa', 'hal hebat', 'Location Unknown', 'sesuatu di jogja', 'The Lazy Song', 'bercinta lewat kata', 'multo',  'back to friends', 'notion', 'terpikat senyummu', 'terlalu lama', 'bunga maaf', 'blue',  'satu bulan','jatuh suka', 'berapa kali kita akan saling memaafkan', 'lantas', 'alamak','hindia', 'feast', 'bernady', 'tulus', 'pamungkas', 'juicy luicy', 'rizky febian','mahalini', 'lyodra', 'tiara andini', 'raisa', 'afgan', 'yura yunita', 'nadin amizah','for revenge', 'dewa 19', 'sheila on 7', 'noah', 'ungu', 'armada', 'd masiv','vierra', 'samsons','fourtwnty', 'fiersa besari', 'denny caknan', 'ndx aka','happy asmara', 'guyon waton', 'aftershine', 'weird genius', 'rich brian', 'niki', 'coldplay', 'bruno mars', 'the weeknd', 'ariana grande', 'taylor swift', 'billie eilish', 'justin bieber', 'ed sheeran','olivia rodrigo','sza','new jeans','blackpink','bts','one direction','lany','wave to earth','keshi', 'joji','viral tiktok indonesia','top hits indonesia','lagu galau indonesia','lagu pop indonesia'];
   const $ = id => document.getElementById(id);
   const audio = $('audio');
 
@@ -395,7 +396,7 @@
   function renderQuickFrom(list){
     $('quickGrid').innerHTML = list.slice(0, 4).map(t => `
       <div class="quick" onclick="playByUrl('${enc(t.previewUrl)}')">
-        ${cover(t.thumbnail, 'fallback')}
+        ${cover(t.thumbnail, 'fallback', t.title, t.artist)}
         <b>${esc(t.title)}</b>
       </div>`).join('') || '<p class="empty">Belum ada data.</p>';
   }
@@ -430,7 +431,7 @@
     const found = await fetchTracks(q);
     tracks = unique([...found, ...tracks]);
     renderList('searchResults', found);
-    if (!found.length) showToast('Lagu tidak ditemukan atau API tidak mengirim audio valid.');
+    if (!found.length) showToast('Lagu tidak ditemukan atau tidak tersedia full audio Jamendo.');
     updateStats();
   }
 
@@ -448,16 +449,32 @@
 
   function normalize(data, fallback){
     const out = [];
+    // Handle Jamendo API results
+    if (data && Array.isArray(data.results)) {
+      return data.results.map(item => {
+        if (!item || typeof item !== 'object') return null;
+        const audio_url = pick(item, ['audio','audiodownload','audio_download','audioUrl','audio_url','previewUrl','url'], '');
+        if (!audio_url || !audio_url.startsWith('http')) return null;
+        const title = pick(item, ['name','title','trackName'], 'Unknown Title');
+        const artist = pick(item, ['artist_name','artist','artistName'], 'Unknown Artist');
+        const thumb = pick(item, ['artworkUrl100','image','album_image','cover_url','artwork','poster'], '');
+        const dur = pick(item, ['trackTimeMillis','duration','durasi','time'], '3:00');
+        const duration = typeof dur === 'number' ? `${Math.floor(dur/60)}:${String(dur%60).padStart(2,'0')}` : dur;
+        return { id: title + '-' + artist + '-' + audio_url, title, artist, thumbnail: thumb, previewUrl: audio_url, duration };
+      }).filter(Boolean);
+    }
+    // Fallback untuk nested structure
     function read(x){
       if (Array.isArray(x)) return x.forEach(read);
       if (!x || typeof x !== 'object') return;
-      const url = pick(x, ['download','audio','audioUrl','audio_url','url','mp3','m4a','stream','streamUrl','previewUrl','preview']);
-      const title = pick(x, ['title','name','judul','trackName'], fallback);
-      const artist = pick(x, ['artist','artis','artists','singer','author','creator'], 'Unknown Artist');
-      const thumb = pick(x, ['image','thumbnail','thumb','cover','artwork','poster'], '');
-      const dur = pick(x, ['duration','durasi','time'], '3:00');
+      const url = pick(x, ['audio','audiodownload','audio_download','audio_url','audioUrl','previewUrl','download','stream','streamUrl','url','mp3','m4a']);
+      const title = pick(x, ['name','title','trackName'], fallback);
+      const artist = pick(x, ['artist_name','artist','artistName','creator'], 'Unknown Artist');
+      const thumb = pick(x, ['artworkUrl100','image','album_image','cover_url','artwork','poster','thumbnail'], '');
+      const dur = pick(x, ['trackTimeMillis','duration','durasi','time'], '3:00');
+      const duration = typeof dur === 'number' ? `${Math.floor(dur/60)}:${String(dur%60).padStart(2,'0')}` : dur;
       if (url && url.startsWith('http')) {
-        out.push({ id: title + '-' + artist + '-' + url, title, artist, thumbnail: thumb, previewUrl: url, duration: dur });
+        out.push({ id: title + '-' + artist + '-' + url, title, artist, thumbnail: thumb, previewUrl: url, duration });
       }
       ['result','data','results','tracks','items','songs','list','music','song'].forEach(k => { if (x[k] && x[k] !== x) read(x[k]); });
     }
@@ -493,7 +510,7 @@
   function renderCards(id, list){
     $(id).innerHTML = list.map(t => `
       <div class="card" onclick="playByUrl('${enc(t.previewUrl)}')">
-        ${cover(t.thumbnail, 'cover')}
+        ${cover(t.thumbnail, 'cover', t.title, t.artist)}
         <div class="card-title">${esc(t.title)}</div>
         <div class="card-sub">${esc(t.artist)}</div>
       </div>`).join('') || '<p class="empty">Belum ada lagu.</p>';
@@ -502,7 +519,7 @@
   function renderList(id, list){
     $(id).innerHTML = list.map(t => `
       <div class="track">
-        ${cover(t.thumbnail, 'track-cover')}
+        ${cover(t.thumbnail, 'track-cover', t.title, t.artist)}
         <div class="track-main" onclick="playByUrl('${enc(t.previewUrl)}')">
           <div class="track-title">${esc(t.title)}</div>
           <div class="track-artist">${esc(t.artist)} • ${esc(t.duration || '3:00')}</div>
@@ -551,9 +568,8 @@
     $('fpPlay').textContent = audio.paused ? '▶' : 'Ⅱ';
     $('fpLike').textContent = isFav(currentTrack) ? '♥' : '♡';
     $('likeBtn').textContent = isFav(currentTrack) ? '♥' : '♡';
-    $('fpCoverWrap').outerHTML = currentTrack.thumbnail
-      ? `<img id="fpCoverWrap" class="fp-cover" src="${esc(currentTrack.thumbnail)}" onerror="this.outerHTML='<div id=&quot;fpCoverWrap&quot; class=&quot;fp-fallback&quot;>♫</div>'">`
-      : `<div id="fpCoverWrap" class="fp-fallback">♫</div>`;
+    const fcover = currentTrack.thumbnail || svgDataUri(currentTrack.title, currentTrack.artist, 520);
+    $('fpCoverWrap').outerHTML = `<img id="fpCoverWrap" class="fp-cover" src="${esc(fcover)}" onerror="this.outerHTML='<div id=&quot;fpCoverWrap&quot; class=&quot;fp-fallback&quot;>♫</div>'">`;
   }
 
   function nextTrack(){
@@ -586,9 +602,8 @@
       $('player').classList.remove('hidden');
       $('playerTitle').textContent = track.title;
       $('playerArtist').textContent = track.artist;
-      $('playerCoverBox').outerHTML = track.thumbnail
-        ? `<img id="playerCoverBox" src="${esc(track.thumbnail)}" onerror="this.outerHTML='<div id=&quot;playerCoverBox&quot; class=&quot;p-fallback&quot;>♫</div>'">`
-        : `<div id="playerCoverBox" class="p-fallback">♫</div>`;
+      const pcover = track.thumbnail || svgDataUri(track.title, track.artist, 200);
+      $('playerCoverBox').outerHTML = `<img id="playerCoverBox" src="${esc(pcover)}" onerror="this.outerHTML='<div id=&quot;playerCoverBox&quot; class=&quot;p-fallback&quot;>♫</div>'">`;
       $('playPauseBtn').textContent = '...'; $('fpPlay').textContent = '...';
       audio.pause();
       audio.removeAttribute('src');
@@ -643,7 +658,12 @@
   function toggleFavorite(track){
     if (!track) return;
     if (isFav(track)) favorites = favorites.filter(f => f.previewUrl !== track.previewUrl);
-    else favorites.unshift(track);
+    else {
+      // ensure artwork exists (use placeholder if missing)
+      const art = track.thumbnail || svgDataUri(track.title, track.artist, 200);
+      const copy = Object.assign({}, track, { thumbnail: art });
+      favorites.unshift(copy);
+    }
     favorites = unique(favorites);
     localStorage.setItem('neonflow_fav_' + user.name, JSON.stringify(favorites));
     renderFavorites();
@@ -670,8 +690,26 @@
   }
 
   function cover(src, cls){
-    return src ? `<img class="${cls}" src="${esc(src)}" onerror="this.outerHTML='<div class=&quot;${cls}&quot;>♫</div>'">` : `<div class="${cls}">♫</div>`;
+    // if src is provided use it, otherwise caller should pass title/artist to generate placeholder
+    // keep backward compatible signature: cover(src, cls, title, artist)
+    const title = arguments[2] || '';
+    const artist = arguments[3] || '';
+    if (src) return `<img class="${cls}" src="${esc(src)}" onerror="this.outerHTML='<div class=&quot;${cls}&quot;>♫</div>'">`;
+    const data = svgDataUri(title, artist, 200);
+    return `<img class="${cls}" src="${esc(data)}" onerror="this.outerHTML='<div class=&quot;${cls}&quot;>♫</div>'">`;
   }
+
+  function svgDataUri(title, artist, size){
+    const bg = '#121212';
+    const fg = '#24ff8a';
+    const short = (s, n) => (s && s.length>n) ? s.substr(0,n-1)+'…' : (s||'');
+    const t = short(title, 24);
+    const a = short(artist, 24);
+    const xml = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}"><rect width="100%" height="100%" fill="${bg}"/><text x="50%" y="45%" font-family="Arial, Helvetica, sans-serif" font-size="18" fill="${fg}" text-anchor="middle" dominant-baseline="middle">${escapeXml(t)}</text><text x="50%" y="75%" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#bfc9d8" text-anchor="middle" dominant-baseline="middle">${escapeXml(a)}</text></svg>`;
+    return 'data:image/svg+xml;utf8,' + encodeURIComponent(xml);
+  }
+
+  function escapeXml(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;'); }
 
   function enc(s){ return encodeURIComponent(s || ''); }
   function esc(s){ return String(s || '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }

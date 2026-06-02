@@ -3,13 +3,13 @@ description: A simple Flutter client for FahriGenzVibe (iTunes preview player)
 publish_to: 'none'
 version: 0.0.1
 environment:
-  sdk: '>=2.17.0 <3.0.0'
+  sdk: '>=3.1.0 <4.0.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.13.0
-  audioplayers: ^1.0.1
+  http: ^0.13.6
+  audioplayers: ^5.0.1
   shared_preferences: ^2.0.15
 
 dev_dependencies:

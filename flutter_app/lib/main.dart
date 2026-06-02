@@ -230,12 +230,8 @@ class _SearchPageState extends State<SearchPage> {
       }
     } else {
       await _player.stop();
-      final result = await _player.play(UrlSource(s.previewUrl));
-      if (result == PlayerState.playing) {
-        setState(() => playingUrl = s.previewUrl);
-      } else {
-        setState(() => playingUrl = s.previewUrl);
-      }
+      await _player.play(UrlSource(s.previewUrl));
+      setState(() => playingUrl = s.previewUrl);
     }
     setState(() {});
   }
@@ -406,53 +402,60 @@ class _SearchPageState extends State<SearchPage> {
       ]),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: _currentIndex == 0 ? Column(
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _ctrl,
-                    decoration: const InputDecoration(hintText: 'Cari lagu, contoh: nina'),
-                    onSubmitted: search,
+        child: _currentIndex == 0
+            ? Column(
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextField(
+                          controller: _ctrl,
+                          decoration: const InputDecoration(hintText: 'Cari lagu, contoh: nina'),
+                          onSubmitted: search,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      ElevatedButton(
+                        onPressed: () => search(_ctrl.text),
+                        child: const Text('Cari'),
+                      )
+                    ],
                   ),
-                ),
-                const SizedBox(width: 8),
-                ElevatedButton(
-                  onPressed: () => search(_ctrl.text),
-                  child: const Text('Cari'),
-                )
-              ],
-            ),
-            const SizedBox(height: 12),
-            if (loading) SizedBox(
-              height: 240,
-              child: ListView.separated(
-                itemCount: 6,
-                separatorBuilder: (_, __) => const SizedBox(height: 8),
-                itemBuilder: (_, __) => Container(
-                  height: 72,
-                  decoration: BoxDecoration(color: Colors.grey[850], borderRadius: BorderRadius.circular(12)),
-                  padding: const EdgeInsets.all(12),
-                  child: Row(children: [Container(width:56, height:56, color: Colors.grey[800]), const SizedBox(width:12), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [Container(height:14,color:Colors.grey[800]), const SizedBox(height:8), Container(height:12,color:Colors.grey[800])]))]),
-                ),
-              ),
-            ),
-            Expanded(
-              child: results.isEmpty
-                  ? const Center(child: Text('Tidak ada hasil.'))
-                  : ListView.separated(
-                      itemCount: results.length,
-                      separatorBuilder: (_, __) => const Divider(height: 1),
-                      itemBuilder: (_, i) => _tile(results[i]),
+                  const SizedBox(height: 12),
+                  if (loading)
+                    SizedBox(
+                      height: 240,
+                      child: ListView.separated(
+                        itemCount: 6,
+                        separatorBuilder: (_, __) => const SizedBox(height: 8),
+                        itemBuilder: (_, __) => Container(
+                          height: 72,
+                          decoration: BoxDecoration(color: Colors.grey[850], borderRadius: BorderRadius.circular(12)),
+                          padding: const EdgeInsets.all(12),
+                          child: Row(children: [Container(width:56, height:56, color: Colors.grey[800]), const SizedBox(width:12), Expanded(child: Column(crossAxisAlignment: CrossAxisAlignment.start, mainAxisAlignment: MainAxisAlignment.center, children: [Container(height:14,color:Colors.grey[800]), const SizedBox(height:8), Container(height:12,color:Colors.grey[800])]))]),
+                        ),
+                      ),
                     ),
-            )
-          ],
-        ) : (_currentIndex == 1 ? (favorites.isEmpty ? const Center(child: Text('Belum ada favorit.')) : ListView.separated(
-          itemCount: favorites.length,
-          separatorBuilder: (_, __) => const Divider(height: 1),
-          itemBuilder: (_, i) => _tile(favorites[i]),
-        )) : _buildPlaylists(),
+                  Expanded(
+                    child: results.isEmpty
+                        ? const Center(child: Text('Tidak ada hasil.'))
+                        : ListView.separated(
+                            itemCount: results.length,
+                            separatorBuilder: (_, __) => const Divider(height: 1),
+                            itemBuilder: (_, i) => _tile(results[i]),
+                          ),
+                  )
+                ],
+              )
+            : _currentIndex == 1
+                ? (favorites.isEmpty
+                    ? const Center(child: Text('Belum ada favorit.'))
+                    : ListView.separated(
+                        itemCount: favorites.length,
+                        separatorBuilder: (_, __) => const Divider(height: 1),
+                        itemBuilder: (_, i) => _tile(favorites[i]),
+                      ))
+                : _buildPlaylists(),
       ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,

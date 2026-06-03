@@ -1,13 +1,16 @@
 from flask import Flask, request, send_from_directory, jsonify
+from flask_cors import CORS
 import requests
 import os
 import json
 from datetime import datetime
 
 app = Flask(__name__, static_folder='.')
+CORS(app)
 JAMENDO_CLIENT_ID = os.environ.get('JAMENDO_CLIENT_ID')
 JAMENDO_CLIENT_SECRET = os.environ.get('JAMENDO_CLIENT_SECRET')
 PLAYLISTS_FILE = 'playlists.json'
+PORT = int(os.environ.get('PORT', 8000))
 
 def read_playlists():
     if not os.path.exists(PLAYLISTS_FILE):
@@ -41,7 +44,7 @@ def api_search():
         # Jamendo API - menyediakan audio streaming penuh dari lagu dengan lisensi gratis
         params = {
             'format': 'json',
-            'limit': 50,
+            'limit': 200,
             'order': 'popularity_week',
             'client_id': JAMENDO_CLIENT_ID,
             'name': q,
@@ -50,7 +53,7 @@ def api_search():
         }
         if JAMENDO_CLIENT_SECRET:
             params['client_secret'] = JAMENDO_CLIENT_SECRET
-        res = requests.get('https://api.jamendo.com/v3.0/tracks', params=params, timeout=10)
+        res = requests.get('https://api.jamendo.com/v3.0/tracks', params=params, timeout=30)
         res.raise_for_status()
         data = res.json()
         headers = data.get('headers', {})
@@ -102,4 +105,4 @@ def api_delete_playlist(pid):
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8000, debug=True)
+    app.run(host='0.0.0.0', port=PORT, debug=False)
